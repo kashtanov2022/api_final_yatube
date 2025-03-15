@@ -1,7 +1,11 @@
 from rest_framework import viewsets, mixins, permissions, filters
 
-from posts.models import Post, Comment, Follow
-from .serializers import PostSerializer, CommentSerializer, FollowSerializer
+from posts.models import Post, Comment, Follow, Group, User
+from .serializers import (PostSerializer,
+                          CommentSerializer,
+                          FollowSerializer,
+                          GroupSerializer,
+                          UserSerializer)
 from .permissions import IsAuthorOrReadOnly
 
 
@@ -42,3 +46,13 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
