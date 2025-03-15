@@ -23,7 +23,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Comment
-  
+
 
 class FollowSerializer(serializers.ModelSerializer):
     user = SlugRelatedField(
