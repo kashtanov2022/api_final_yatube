@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'api',
     'posts',
     'rest_framework_simplejwt',
+    'djoser',
 ]
 
 MIDDLEWARE = [
