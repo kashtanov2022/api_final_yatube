@@ -4,7 +4,6 @@ import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -24,7 +23,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name='follow',
-            constraint=models.CheckConstraint(condition=models.Q(('user', models.F('following')), _negated=True), name='prevent_self_follow'),
+            constraint=models.CheckConstraint(check=~models.Q(user=models.F('following')), name='prevent_self_follow'),
         ),
         migrations.AddField(
             model_name='post',
