@@ -2,13 +2,18 @@ from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
 from django.contrib.auth import get_user_model
 
-from posts.models import Comment, Post, Follow
+from posts.models import Comment, Post, Follow, Group
 
 User = get_user_model()
 
 
 class PostSerializer(serializers.ModelSerializer):
     author = SlugRelatedField(slug_field='username', read_only=True)
+    group = SlugRelatedField(
+        slug_field='slug',
+        queryset=Group.objects.all(),
+        required=False
+    )
 
     class Meta:
         fields = '__all__'
